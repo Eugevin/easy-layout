@@ -1,0 +1,36 @@
+.welcome {
+  transform: translateY(50px);
+  padding: 25px;
+  border: 1px solid #eeeeee;
+  max-width: 75vw;
+  font-family: "Helvetica", "Arial", sans-serif;
+
+  opacity: 0;
+  visibility: hidden;
+
+  animation: showUp 1s ease forwards;
+
+  img {
+    max-width: 50%;
+  }
+
+  p {
+    margin: 20px 0 0;
+    font-size: 20px;
+  }
+
+  code {
+    background: #eeeeee;
+  }
+}
+
+@keyframes showUp {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}
