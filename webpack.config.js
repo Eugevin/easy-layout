@@ -24,9 +24,13 @@ module.exports = {
   devServer: {
     contentBase: "./build",
   },
-  plugins: [new MiniCssExtractPlugin()].concat(allPagesPlugins),
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "css/[name].[contenthash].css",
+    }),
+  ].concat(allPagesPlugins),
   output: {
-    filename: "bundle.[contenthash].js",
+    filename: "js/bundle.[contenthash].js",
     path: path.resolve(__dirname, "build"),
     clean: true,
   },
