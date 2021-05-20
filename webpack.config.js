@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 let allPages;
 
@@ -13,7 +14,7 @@ try {
 const allPagesPlugins = allPages.map((pageName) => {
   return new HtmlWebpackPlugin({
     template: `./src/pages/${pageName}`,
-    filename: `${pageName.split('.')[0]}.html`,
+    filename: `${pageName.split(".")[0]}.html`,
   });
 });
 
@@ -23,7 +24,7 @@ module.exports = {
   devServer: {
     contentBase: "./build",
   },
-  plugins: [].concat(allPagesPlugins),
+  plugins: [new MiniCssExtractPlugin()].concat(allPagesPlugins),
   output: {
     filename: "bundle.[contenthash].js",
     path: path.resolve(__dirname, "build"),
@@ -53,7 +54,7 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
-          "style-loader",
+          MiniCssExtractPlugin.loader,
           // Translates CSS into CommonJS
           "css-loader",
           // POST-CSS LOADER
@@ -64,7 +65,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,

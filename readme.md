@@ -1,6 +1,6 @@
 # For what
 
-_For easy build and write code for your HTML, CSS and JavaScript project with autoprefixer, babel, hot-reload, bootstrap
+_For easy build and write code for your HTML, CSS and JavaScript project with pug (jade), autoprefixer, babel, hot-reload, bootstrap
 and normalize.css_
 
 ## How to use
@@ -13,7 +13,7 @@ _Now we have two commands: `npm run dev` for development job and `npm run build`
 
 _You can add new npm packages to your project with `npm i [package name]` and connect it into project via `import` in `./src/index.js`_
 
-_If you want to create new `.html` file in `./src/pages` folder, you need do the restart of webpack compiler!_
+_If you want to create new `.pug` file in `./src/pages` folder, you need do the restart of webpack compiler!_
 
 ## Here we go
 
