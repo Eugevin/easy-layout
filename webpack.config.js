@@ -3,20 +3,25 @@ const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-let allPages;
-
-try {
-  allPages = fs.readdirSync("./src/pages/");
-} catch (err) {
-  console.error(err);
+// Our function that generates our html plugins
+function generateHtmlPlugins(templateDir) {
+  // Read files in template directory
+  const templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir));
+  return templateFiles.map((item) => {
+    // Split names and extension
+    const parts = item.split(".");
+    const name = parts[0];
+    const extension = parts[1];
+    // Create new HTMLWebpackPlugin with options
+    return new HtmlWebpackPlugin({
+      filename: `${name}.html`,
+      template: path.resolve(__dirname, `${templateDir}/${name}.${extension}`),
+    });
+  });
 }
 
-const allPagesPlugins = allPages.map((pageName) => {
-  return new HtmlWebpackPlugin({
-    template: `./src/pages/${pageName}`,
-    filename: `${pageName.split(".")[0]}.html`,
-  });
-});
+// Call our function on our views directory.
+const htmlPlugins = generateHtmlPlugins("./src/template/views");
 
 module.exports = {
   entry: "./src/index.js",
@@ -28,7 +33,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash].css",
     }),
-  ].concat(allPagesPlugins),
+  ].concat(htmlPlugins),
   output: {
     filename: "js/bundle.[contenthash].js",
     path: path.resolve(__dirname, "build"),

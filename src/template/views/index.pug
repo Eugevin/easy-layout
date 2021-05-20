@@ -1,9 +1,11 @@
+include ../include/head
+
 .container
   .col-lg-12
     .welcome
-      img(src=require('../assets/img/welcome.jpg'), alt='just image')
+      img(src=require('../../assets/img/welcome.jpg'), alt='just image')
       p Thanks for using this bundler! First of all your need to delete files in <code>./src/assets/*</code> folder
       p With <code>npm run dev</code> you can start develop your layout with inline-source-maps, hot reload and other cool features for develop
       p With <code>npm run build</code> you can compress and optimize your code for production
       p Active packages: <code>bootstrap.grid.min.css</code>, <code>pug (jade)</code>, <code>normalize.css</code>, <code>babel</code>, <code>autoprefixer</code>
-      p All pages stored in <code>./src/pages/</code>. If you want to create new <code>.pug</code> file, you need do the restart of webpack compiler!
+      p All pages stored in <code>./src/template/views</code>. After create new <code>.pug</code> file in this directory, you need do the restart of webpack compiler for changes!
