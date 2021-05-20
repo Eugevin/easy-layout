@@ -19,6 +19,7 @@
     "html-webpack-plugin": "^5.3.1",
     "postcss": "^8.2.15",
     "postcss-loader": "^5.3.0",
+    "pug": "^3.0.2",
     "pug-loader": "^2.4.0",
     "sass": "^1.32.13",
     "sass-loader": "^11.1.1",

@@ -13,7 +13,7 @@ _Now we have two commands: `npm run dev` for development job and `npm run build`
 
 _You can add new npm packages to your project with `npm i [package name]` and connect it into project via `import` in `./src/index.js`_
 
-_If you want to create new `.html` file in `./src/pages` folder if , you need do the restart of webpack compiler!_
+_If you want to create new `.html` file in `./src/pages` folder, you need do the restart of webpack compiler!_
 
 ## Here we go
 

@@ -13,7 +13,7 @@ try {
 const allPagesPlugins = allPages.map((pageName) => {
   return new HtmlWebpackPlugin({
     template: `./src/pages/${pageName}`,
-    filename: pageName,
+    filename: `${pageName.split('.')[0]}.html`,
   });
 });
 
@@ -34,6 +34,10 @@ module.exports = {
       {
         test: /\.html$/i,
         loader: "html-loader",
+      },
+      {
+        test: /\.pug$/i,
+        loader: "pug-loader",
       },
       {
         test: /\.m?js$/,
