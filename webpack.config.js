@@ -27,7 +27,7 @@ module.exports = {
   entry: "./src/index.js",
   devtool: "inline-source-map",
   devServer: {
-    contentBase: "./build",
+    contentBase: path.resolve(__dirname, "build"),
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -37,6 +37,7 @@ module.exports = {
   output: {
     filename: "js/bundle.[contenthash].js",
     path: path.resolve(__dirname, "build"),
+    publicPath: "/",
     clean: true,
   },
   module: {
@@ -80,7 +81,7 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
         generator: {
-          filename: "img/[name].[contenthash][ext][query]",
+          filename: "img/[name][ext][query]",
         },
       },
       {
