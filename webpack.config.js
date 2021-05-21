@@ -35,9 +35,8 @@ module.exports = {
     }),
   ].concat(htmlPlugins),
   output: {
-    filename: "js/bundle.[contenthash].js",
+    filename: "bundle.[contenthash].js",
     path: path.resolve(__dirname, "build"),
-    publicPath: "/",
     clean: true,
   },
   module: {
