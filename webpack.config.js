@@ -23,69 +23,75 @@ function generateHtmlPlugins(templateDir) {
 // Call our function on our views directory.
 const htmlPlugins = generateHtmlPlugins("./src/template/views");
 
-module.exports = {
-  entry: "./src/index.js",
-  devtool: "inline-source-map",
-  devServer: {
-    contentBase: path.resolve(__dirname, "build"),
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-    }),
-  ].concat(htmlPlugins),
-  output: {
-    filename: "bundle.[contenthash].js",
-    path: path.resolve(__dirname, "build"),
-    clean: true,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.pug$/i,
-        loader: "pug-loader",
-      },
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
+module.exports = (env, options) => {
+  const currentMode = options.mode;
+
+  console.log(currentMode)
+
+  return {
+    entry: "./src/index.js",
+    devtool: "inline-source-map",
+    devServer: {
+      contentBase: path.resolve(__dirname, "build"),
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: "[name].[contenthash].css",
+      }),
+    ].concat(htmlPlugins),
+    output: {
+      filename: "bundle.[contenthash].js",
+      path: path.resolve(__dirname, "build"),
+      clean: currentMode === 'production' ? false : true,
+    },
+    module: {
+      rules: [
+        {
+          test: /\.pug$/i,
+          loader: "pug-loader",
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env"],
+            },
           },
         },
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          MiniCssExtractPlugin.loader,
-          // Translates CSS into CommonJS
-          "css-loader",
-          // POST-CSS LOADER
-          "postcss-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
-        ],
-      },
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
-        generator: {
-          filename: "img/[name][ext][query]",
+        {
+          test: /\.s[ac]ss$/i,
+          use: [
+            // Creates `style` nodes from JS strings
+            MiniCssExtractPlugin.loader,
+            // Translates CSS into CommonJS
+            "css-loader",
+            // POST-CSS LOADER
+            "postcss-loader",
+            // Compiles Sass to CSS
+            "sass-loader",
+          ],
         },
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: "asset/resource",
-        generator: {
-          filename: "fonts/[name][ext][query]",
+        {
+          test: /\.css$/i,
+          use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
         },
-      },
-    ],
-  },
-};
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: "asset/resource",
+          generator: {
+            filename: "img/[name][ext][query]",
+          },
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/i,
+          type: "asset/resource",
+          generator: {
+            filename: "fonts/[name][ext][query]",
+          },
+        },
+      ],
+    },
+  };
+}
