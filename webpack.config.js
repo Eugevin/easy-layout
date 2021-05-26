@@ -24,10 +24,6 @@ function generateHtmlPlugins(templateDir) {
 const htmlPlugins = generateHtmlPlugins("./src/template/views");
 
 module.exports = (env, options) => {
-  const currentMode = options.mode;
-
-  console.log(currentMode)
-
   return {
     entry: "./src/index.js",
     devtool: "inline-source-map",
@@ -42,7 +38,7 @@ module.exports = (env, options) => {
     output: {
       filename: "bundle.[contenthash].js",
       path: path.resolve(__dirname, "build"),
-      clean: currentMode === 'production' ? false : true,
+      clean: options.mode === 'production' ? true : false,
     },
     module: {
       rules: [
