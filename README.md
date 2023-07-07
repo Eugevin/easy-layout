@@ -1,3 +1,7 @@
+[DEPRECATED]
+
+Reson: I wrote this thing a long time ago for workers at an old job. I think that all of them are already using more sophisticated tools and there is no need to use such an outdated builder
+
 # For what
 
 _For easy build and write code for your HTML, CSS and JavaScript project with pug (jade), autoprefixer, babel, hot-reload, bootstrap
